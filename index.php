@@ -9,7 +9,7 @@ $translationServiceClient = new TranslationServiceClient();
 ?>
 <INPUT TYPE = "Text" VALUE ="text" NAME = "text">
 <?php
-$username = $_POST['text'];
+$text = $_POST['text'];
 // $text = 'Hello, world!';
 $targetLanguage = 'fr';
 $projectId = 'AIzaSyC8WSQX5pjS41THP_YfG5fvvAY66DvOhw4';
