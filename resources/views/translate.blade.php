@@ -1,7 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
-
+require __DIR__ . '/vendor/autoload.php';
 
 use Google\Cloud\Translate\V3\TranslationServiceClient;
 
@@ -40,7 +39,6 @@ try {
         $targetLanguage,
         $formattedParent
     );
-    // Display the translation for each input text provided
     foreach ($response->getTranslations() as $translation) {
         printf('Translated text: %s' . PHP_EOL, $translation->getTranslatedText());
     }
