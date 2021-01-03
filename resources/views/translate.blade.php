@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Google\Cloud\Translate\V3\TranslationServiceClient;
 
