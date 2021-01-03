@@ -1,60 +1,50 @@
 <?php
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
- */
+require '../vendor/autoload.php';
+putenv('GOOGLE_APPLICATION_CREDENTIALS=../mercurial-ruler-300412-afdb2b91bb57.json');
 
-define('LARAVEL_START', microtime(true));
+use Google\Cloud\Translate\V3\TranslationServiceClient;
 
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader for
-| our application. We just need to utilize it! We'll simply require it
-| into the script here so that we don't have to worry about manual
-| loading any of our classes later on. It feels great to relax.
-|
-*/
+$translationServiceClient = new TranslationServiceClient();
 
-require __DIR__.'/../vendor/autoload.php';
+?>
 
-/*
-|--------------------------------------------------------------------------
-| Turn On The Lights
-|--------------------------------------------------------------------------
-|
-| We need to illuminate PHP development, so let us turn on the lights.
-| This bootstraps the framework and gets it ready for use, then it
-| will load up this application so that we can run it and send
-| the responses back to the browser and delight our users.
-|
-*/
+<form action="/" method="post">
+  Write text
+  <input type="text" name="translate" maxlength="50" />
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+  Please choose language
+  <select name="targetLanguage">
+     <option value="">Select...</option>
+     <option value="de">de</option>
+     <option value="ru">ru</option>
+  </select>
 
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request
-| through the kernel, and send the associated response back to
-| the client's browser allowing them to enjoy the creative
-| and wonderful application we have prepared for them.
-|
-*/
+<input type="submit" name="formSubmit" value="Submit" name="formSubmit" />
+</form>
 
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+<?php
 
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
 
-$response->send();
+if($_POST['formSubmit'] == "Submit") 
+{
+    $translate = $_POST['translate'];
+    $targetLanguage = $_POST['targetLanguage'];
+    $projectId = 'mercurial-ruler-300412';
+    $contents = [$translate];
+    $formattedParent = $translationServiceClient->locationName($projectId, 'global');
 
-$kernel->terminate($request, $response);
+try {
+    $response = $translationServiceClient->translateText(
+        $contents,
+        $targetLanguage,
+        $formattedParent
+    );
+    foreach ($response->getTranslations() as $translation) {
+        printf('Translated text: %s' . PHP_EOL, $translation->getTranslatedText());
+    }
+} finally {
+    $translationServiceClient->close();
+}
+
+}
