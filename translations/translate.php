@@ -6,8 +6,8 @@ use Google\Cloud\Translate\V3\TranslationServiceClient;
 
 $translationServiceClient = new TranslationServiceClient();
 
-
-$text = 'Hello, world!';
+$username = $_POST['text'];
+// $text = 'Hello, world!';
 $targetLanguage = 'fr';
 $projectId = 'AIzaSyC8WSQX5pjS41THP_YfG5fvvAY66DvOhw4';
 $contents = [$text];
