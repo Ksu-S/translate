@@ -1,6 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
+putenv('GOOGLE_APPLICATION_CREDENTIALS=../mercurial-ruler-300412-afdb2b91bb57.json');
 
 use Google\Cloud\Translate\V3\TranslationServiceClient;
 
@@ -19,7 +20,7 @@ $translationServiceClient = new TranslationServiceClient();
      <option value="ru">ru</option>
   </select>
 
-<input type="submit" name="formSubmit" value="Submit" name="formSubmit" />
+<input type="submit" value="Submit" name="formSubmit" />
 </form>
 
 <?php
