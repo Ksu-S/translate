@@ -6,7 +6,7 @@ use Google\Cloud\AutoMl\V1\AutoMlClient;
 use Google\Cloud\AutoMl\V1\Dataset;
 use Google\Cloud\AutoMl\V1\TranslationDatasetMetadata;
 
-$projectId = 'mercurial-ruler-300412';
+$projectId = 'translations-s';
 $location = 'us-central1';
 $displayName = 'translate_text_test';
 $sourceLanguage = 'de';

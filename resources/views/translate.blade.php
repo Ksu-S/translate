@@ -1,7 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
-putenv('GOOGLE_APPLICATION_CREDENTIALS=../mercurial-ruler-300412-afdb2b91bb57.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=../translations-fc2826bf9932.json');
 
 use Google\Cloud\Translate\V3\TranslationServiceClient;
 
